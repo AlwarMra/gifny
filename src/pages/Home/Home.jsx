@@ -1,37 +1,30 @@
-import React, { useState } from 'react'
+import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ListOfGifs } from '../../components/index'
+import { ListOfGifs, TrendingTerms, SearchForm } from '../../components/index'
 import useGifs from '../../hooks/useGifs'
 
 const Home = () => {
-  const [keyword, setKeyword] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    navigate('/search/' + keyword)
-    console.log(keyword)
-  }
+  const handleSubmit = useCallback(
+    ({ keyword }) => {
+      navigate('/search/' + keyword)
+    },
+    [navigate]
+  )
 
-  const handleChange = e => {
-    setKeyword(e.target.value)
-  }
   const { gifs } = useGifs({ trend: true })
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          className='border border-slate-900'
-          type='text'
-          placeholder='Search gif here'
-          value={keyword}
-          onChange={handleChange}
-        />
-        <input type='submit' value='Search' />
-      </form>
-      <ListOfGifs gifs={gifs} />
-    </>
+    <div className='grid md:grid-cols-4/5 gap-x-8'>
+      <div className='row-start-2	md:row-start-1'>
+        <SearchForm onSubmit={handleSubmit} />
+        <ListOfGifs gifs={gifs} />
+      </div>
+      <div className='row-start-1'>
+        <TrendingTerms />
+      </div>
+    </div>
   )
 }
 

@@ -1,14 +1,49 @@
-import React from 'react'
+import React, { useEffect, useRef, useCallback } from 'react'
 import { Spinner, ListOfGifs } from '../../components/index'
 import { useParams } from 'react-router-dom'
 import useGifs from '../../hooks/useGifs'
+import useNearScreen from '../../hooks/useNearScreen'
+import debounce from 'just-debounce-it'
 
 const SearchResults = () => {
   const { keyword } = useParams()
+  const externalRef = useRef()
 
-  const { loading, gifs } = useGifs({ keyword })
+  const { loading, gifs, error, setPage } = useGifs({ keyword })
+  const { isNearScreen } = useNearScreen({
+    externalRef: loading ? null : externalRef,
+    once: false,
+  })
 
-  return <>{loading ? <Spinner /> : <ListOfGifs gifs={gifs} />}</>
+  const debounceHandleNextPage = useCallback(
+    debounce(() => setPage(nextPage => nextPage + 1), 1000),
+    []
+  )
+
+  useEffect(() => {
+    if (isNearScreen) debounceHandleNextPage()
+  }, [debounceHandleNextPage, isNearScreen])
+  if (error) {
+    return 'No results'
+  } else {
+    return (
+      <>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <div className='max-w-3xl	'>
+              <h1 className='text-gray-100 text-4xl	my-8 capitalize'>
+                {keyword}
+              </h1>
+              <ListOfGifs gifs={gifs} />
+              <div id='visor' ref={externalRef} />
+            </div>
+          </>
+        )}
+      </>
+    )
+  }
 }
 
 export default SearchResults
