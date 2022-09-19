@@ -9,7 +9,8 @@ function App() {
       <div className='max-w-6xl mx-auto my-0 p-4'>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/search/:keyword' element={<SearchResults />} />
+          <Route path='/search/:keyword/' element={<SearchResults />} />
+          <Route path='/search/:keyword/:rating' element={<SearchResults />} />
           <Route path='/gif/:id' element={<GifDetail />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

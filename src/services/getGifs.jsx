@@ -15,16 +15,17 @@ export default function getGifs({
   limit = 25,
   page = 0,
   trend = false,
+  rating = 'r',
 } = {}) {
   let apiURL = ''
   if (trend) {
     apiURL = `${API_URL}/gifs/trending?api_key=${API_KEY}&limit=10&offset=${
       page * limit
-    }&rating=g`
+    }&rating=${rating}`
   } else {
     apiURL = `${API_URL}/gifs/search?api_key=${API_KEY}&q=${keyword}&limit=${limit}&offset=${
       page * limit
-    }&rating=r&lang=en`
+    }&rating=${rating}&lang=en`
   }
 
   return fetch(apiURL)

@@ -3,7 +3,7 @@ import Gif from './Gif'
 
 const ListOfGifs = ({ gifs }) => {
   return (
-    <div className='grid-parent grid grid-cols-custom-fit gap-x-4 grid-flow-dense	'>
+    <div className='min-h-screen grid-parent grid grid-cols-custom-fit gap-x-4 grid-flow-dense	'>
       {gifs.map(({ id, title, url }) => (
         <Gif id={id} key={id} title={title} url={url} />
       ))}

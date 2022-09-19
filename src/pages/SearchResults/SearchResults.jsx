@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useCallback } from 'react'
-import { Spinner, ListOfGifs } from '../../components/index'
+import { Spinner, ListOfGifs, SearchForm } from '../../components/index'
 import { useParams } from 'react-router-dom'
 import useGifs from '../../hooks/useGifs'
 import useNearScreen from '../../hooks/useNearScreen'
@@ -36,6 +36,7 @@ const SearchResults = () => {
           <Spinner />
         ) : (
           <>
+            <SearchForm />
             <div className='max-w-3xl	'>
               <h1 className='text-gray-100 text-4xl	my-8 capitalize'>
                 {keyword}
