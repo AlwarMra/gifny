@@ -26,19 +26,27 @@ const SearchForm = ({ initialKeyword = '', initialRating = 'r' }) => {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        className='border border-slate-900'
+        className='border-none px-4 py-1 p-b[3px]'
         type='text'
         placeholder='Search gif here'
         value={keyword}
         onChange={handleChange}
       />
-      <select onChange={handleChangeRating} value={rating}>
-        <option disabled>Rating type:</option>
+      <select
+        onChange={handleChangeRating}
+        value={rating}
+        className='px-4 py-1 border-l-2'
+      >
+        <option disabled>Rating:</option>
         {RATINGS.map(rating => (
           <option key={rating}>{rating}</option>
         ))}
       </select>
-      <input type='submit' value='Search' />
+      <input
+        type='submit'
+        value='Search'
+        className='text-white bg-fuchsia-800 px-4 py-1 cursor-pointer hover:bg-teal-500'
+      />
     </form>
   )
 }

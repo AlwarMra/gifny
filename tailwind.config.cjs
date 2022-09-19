@@ -9,6 +9,9 @@ module.exports = {
         '4/5': '4fr 1fr',
         'custom-fit': 'repeat(auto-fit, minmax(180px, 1fr))',
       },
+      boxShadow: {
+        header: '0px 1px 20px rgb(162 28 175)',
+      },
     },
   },
   plugins: [],

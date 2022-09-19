@@ -14,6 +14,16 @@
 .grid-parent div:nth-child(3n + 3) img {
   background-color: rgb(234 179 8);
 }
+.text-gradient-header {
+  background: linear-gradient(
+    90deg,
+    rgba(20, 184, 166, 1) 50%,
+    rgba(134, 25, 143, 1) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .text-gradient {
   background: linear-gradient(
     90deg,

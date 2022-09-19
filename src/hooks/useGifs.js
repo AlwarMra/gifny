@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import GifsContext from '../context/GifsContext'
 import getGifs from '../services/getGifs'
 
 const INITIAL_PAGE = 0
@@ -11,10 +12,15 @@ export default function useGifs({ keyword, trend, r }) {
   const [page, setPage] = useState(INITIAL_PAGE)
   const [gifs, setGifs] = useState([])
 
+  const { gifsSeen, setGifsSeen } = useContext(GifsContext)
+
   useEffect(() => {
     setLoading(true)
     getGifs({ keyword, trend, r })
-      .then(gifs => setGifs(gifs))
+      .then(gifs => {
+        setGifs(gifs)
+        if (keyword !== undefined) setGifsSeen(gifs)
+      })
       .catch(() => setError(true))
       .finally(() => setLoading(false))
   }, [keyword, setGifs])
@@ -28,5 +34,5 @@ export default function useGifs({ keyword, trend, r }) {
     })
   }, [page])
 
-  return { loading, loadingNextPage, gifs, setPage, error }
+  return { loading, loadingNextPage, gifs, gifsSeen, setPage, error }
 }

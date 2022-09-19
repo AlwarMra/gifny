@@ -1,6 +1,5 @@
 // Components
 export { default as Header } from './Header'
-export { default as Footer } from './Footer'
 export { default as Gif } from './Gif'
 export { default as ListOfGifs } from './ListOfGifs'
 export { default as Spinner } from './Spinner'

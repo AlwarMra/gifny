@@ -33,7 +33,9 @@ const SearchResults = () => {
           <title>{keyword + ' | Gifny'}</title>
         </Helmet>
         {loading ? (
-          <Spinner />
+          <div className='mt-32'>
+            <Spinner />
+          </div>
         ) : (
           <>
             <SearchForm />
