@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import useGifs from '../../hooks/useGifs'
 import useNearScreen from '../../hooks/useNearScreen'
 import debounce from 'just-debounce-it'
+import { Helmet } from 'react-helmet'
 
 const SearchResults = () => {
   const { keyword } = useParams()
@@ -28,6 +29,9 @@ const SearchResults = () => {
   } else {
     return (
       <>
+        <Helmet>
+          <title>{keyword + ' | Gifny'}</title>
+        </Helmet>
         {loading ? (
           <Spinner />
         ) : (
